@@ -1,0 +1,1 @@
+echo "# Simple CRUD API with Golang & MySQL" > README.md
