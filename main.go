@@ -34,4 +34,31 @@ func main() {
 	for _, u := range users {
 		fmt.Println(u.ID, u.Name, u.Email)
 	}
+
+	// UPDATE
+updated := models.User{
+	Name:  "Siti Aminah Updated",
+	Email: "siti.updated@mail.com",
+}
+
+	ok, err := controllers.UpdateUser(2, updated)
+	if err != nil {
+		panic(err)
+	}
+	if !ok {
+		fmt.Println("User not found for update")
+	} else {
+		fmt.Println("User updated")
+	}
+
+// DELETE
+	ok, err = controllers.DeleteUser(1)
+	if err != nil {
+		panic(err)
+	}
+	if !ok {
+		fmt.Println("User not found for delete")
+	} else {
+		fmt.Println("User deleted")
+	}
 }

@@ -55,3 +55,50 @@ func GetAllUsers() ([]models.User, error) {
 
 	return users, nil
 }
+
+func UpdateUser(id int, user models.User) (bool, error) {
+	query := `
+		UPDATE users
+		SET name = ?, email = ?
+		WHERE id = ?
+	`
+
+	result, err := config.DB.Exec(query, user.Name, user.Email, id)
+	if err != nil {
+		return false, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return false, err
+	}
+
+	if rowsAffected == 0 {
+		return false, nil // user tidak ditemukan
+	}
+
+	return true, nil
+}
+
+func DeleteUser(id int) (bool, error) {
+	query := `
+		DELETE FROM users
+		WHERE id = ?
+	`
+
+	result, err := config.DB.Exec(query, id)
+	if err != nil {
+		return false, err
+	}
+
+	rowsAffected, err := result.RowsAffected()
+	if err != nil {
+		return false, err
+	}
+
+	if rowsAffected == 0 {
+		return false, nil // user tidak ditemukan
+	}
+
+	return true, nil
+}
