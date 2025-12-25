@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"github.com/amaricee/simple_crud/config"
+
+)
 
 func main() {
-	fmt.Println("Simple CRUD API with Golang & MySQL")
+	fmt.Println("Starting application...")
+
+	config.ConnectDB()
 }
